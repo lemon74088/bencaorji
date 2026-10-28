@@ -33,6 +33,33 @@ input,select,textarea{width:100%;border:1px solid #ded9cf;background:#fffefa;bor
 .nav{position:fixed;bottom:0;left:0;right:0;background:#fffdf8ee;backdrop-filter:blur(15px);border-top:1px solid #e4ded3;display:flex;justify-content:center;padding:8px max(8px,env(safe-area-inset-left)) calc(8px + env(safe-area-inset-bottom));z-index:5}.navin{display:flex;max-width:760px;width:100%;justify-content:space-around}.nav button{border:0;background:transparent;color:#747970;padding:7px 9px;min-width:60px;font-size:12px}.nav button span{display:block;font-size:21px;margin-bottom:3px}.nav button.active{color:var(--green);font-weight:800}
 .hidden{display:none!important}.notice{font-size:12px;color:#6b7168;line-height:1.5}.empty{text-align:center;padding:22px;color:var(--muted);font-size:14px}.sectionhead{margin:18px 0 10px}.inline2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 @media(min-width:620px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.hero{margin-top:16px;border-radius:26px}.app{padding:0 10px}.nav{padding-bottom:10px}}
+
+/* iPhone 日期时间栏位修正：避免原生日期控件超出卡片 */
+@media (max-width: 600px) {
+  #body input[type="datetime-local"] {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    appearance: none;
+    font-size: 16px;
+    line-height: 1.35;
+    padding: 11px 8px;
+    text-align: center;
+  }
+  #body .card,
+  #body .card > *,
+  #body .inline2 > div {
+    min-width: 0;
+  }
+  #body {
+    min-width: 0;
+    overflow-x: clip;
+  }
+}
+
 </style>
 </head>
 <body>
