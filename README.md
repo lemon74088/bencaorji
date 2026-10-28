@@ -1,4 +1,4 @@
-# bencaorji
+# bencaorjihttps://lemon74088.github.io/bencaorji/
 本草观察日记
 本草观察日记｜个人中医观察与药物反馈系统
 
