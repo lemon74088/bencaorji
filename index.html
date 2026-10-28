@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#294638">
+<title>本草观察日记｜第一版</title>
+<style>
+:root{--green:#294638;--green2:#477d58;--cream:#f5f1e7;--ink:#24352d;--muted:#77796f;--white:#fffdf8;--line:#e5e0d5;--shadow:0 5px 18px #2d45351a}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;padding-bottom:90px}
+button,input,select,textarea{font:inherit}button{cursor:pointer}
+.app{max-width:760px;margin:auto;min-height:100vh}
+.hero{background:linear-gradient(140deg,#294638,#426d51);color:white;padding:26px 20px 22px;border-radius:0 0 26px 26px}
+.brand{font-size:12px;letter-spacing:2px;color:#d9e3d4}.hero h1{font-size:27px;margin:7px 0 5px}.hero p{margin:0;color:#d9e3d4;font-size:14px}
+.datebar{display:flex;justify-content:space-between;align-items:center;margin-top:22px;padding-top:15px;border-top:1px solid #ffffff35}.datebar strong{display:block;font-size:20px;margin-top:4px}.datebar small{color:#d9e3d4}
+main{padding:16px}
+.page{display:none}.page.active{display:block}
+h2{font-size:21px;margin:8px 0 5px}h3{font-size:16px;margin:0 0 12px}.sub{font-size:13px;color:var(--muted);margin:0 0 16px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.tile,.card{background:var(--white);border:1px solid #e8e2d7;border-radius:17px;padding:15px;box-shadow:var(--shadow)}
+.tile{min-height:130px;text-align:left;position:relative;overflow:hidden;border:1px solid transparent}
+.tile .num{font-size:12px;font-weight:800;opacity:.8}.tile .emoji{font-size:26px;margin:10px 0 7px}.tile strong{display:block;font-size:16px}.tile small{display:block;color:#59665c;margin-top:5px;line-height:1.45}
+.c-green{background:#e5f0df;border-color:#d3e5cb}.c-coral{background:#fbe5dc;border-color:#f4d3c8}.c-blue{background:#e3eff6;border-color:#d1e3ed}.c-amber{background:#fff0d1;border-color:#f5e2b4}.c-purple{background:#eee8fa;border-color:#dfd4f4}.c-cyan{background:#dff2f3;border-color:#cbe8e9}.c-pink{background:#fbe5e8;border-color:#f4d1d7}.c-orange{background:#f9ead8;border-color:#f0dcc3}.c-teal{background:#e1efe8;border-color:#cde3d8}.c-lavender{background:#ede9f7;border-color:#ddd6ef}.c-sand{background:#f5ead9;border-color:#e9d9c2}
+.btn{border:0;border-radius:12px;background:var(--green);color:white;padding:12px 15px;font-weight:650;min-height:44px}.btn.secondary{background:#e7ece4;color:var(--green)}.btn.ghost{background:transparent;border:1px solid var(--line);color:var(--green)}.btn.danger{background:#a84b43}.btn.small{padding:7px 10px;min-height:34px;font-size:13px}
+.row{display:flex;gap:9px;align-items:center}.between{display:flex;justify-content:space-between;align-items:center;gap:10px}.stack{display:grid;gap:12px}
+label{font-size:13px;font-weight:650;display:block;margin:12px 0 6px}
+input,select,textarea{width:100%;border:1px solid #ded9cf;background:#fffefa;border-radius:11px;padding:11px 12px;color:var(--ink);outline:none}textarea{resize:vertical;min-height:74px}
+.chips{display:flex;flex-wrap:wrap;gap:7px}.chip{border:1px solid #ddd8ce;background:#fffdf8;color:#39483e;padding:9px 12px;border-radius:11px;font-size:14px}.chip.selected{background:#dcebd8;border-color:#4f8960;color:#214b32;font-weight:700}
+.tabs{display:flex;gap:7px;overflow:auto;padding:2px 0 12px}.tabs button{white-space:nowrap;border:0;border-radius:10px;padding:10px 13px;background:#e8e4da;color:#5e655c}.tabs button.active{background:var(--green);color:#fff}
+.pulse-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.hand{background:#fffdf8;border:1px solid var(--line);border-radius:15px;padding:11px}.hand h3{text-align:center;margin:3px 0 10px}.position{border:1px solid #e3ded3;border-radius:12px;margin:8px 0;padding:10px;background:#f8f6ef}.position.active{border-color:#528762;background:#e8f1e3}.position button{border:0;background:transparent;width:100%;display:flex;justify-content:space-between;align-items:center;color:var(--ink);font-weight:700;padding:2px}.position small{display:block;margin-top:6px;color:#477d58;line-height:1.4}
+.record{border:1px solid var(--line);border-radius:14px;padding:13px;background:#fffdf8}.record p{margin:5px 0;font-size:14px;line-height:1.5}.record small{color:var(--muted)}
+.statrow{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.stat{background:#fffdf8;border-radius:15px;padding:14px;border:1px solid var(--line)}.stat strong{font-size:25px;display:block;color:var(--green)}.stat span{font-size:12px;color:var(--muted)}
+.nav{position:fixed;bottom:0;left:0;right:0;background:#fffdf8ee;backdrop-filter:blur(15px);border-top:1px solid #e4ded3;display:flex;justify-content:center;padding:8px max(8px,env(safe-area-inset-left)) calc(8px + env(safe-area-inset-bottom));z-index:5}.navin{display:flex;max-width:760px;width:100%;justify-content:space-around}.nav button{border:0;background:transparent;color:#747970;padding:7px 9px;min-width:60px;font-size:12px}.nav button span{display:block;font-size:21px;margin-bottom:3px}.nav button.active{color:var(--green);font-weight:800}
+.hidden{display:none!important}.notice{font-size:12px;color:#6b7168;line-height:1.5}.empty{text-align:center;padding:22px;color:var(--muted);font-size:14px}.sectionhead{margin:18px 0 10px}.inline2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(min-width:620px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.hero{margin-top:16px;border-radius:26px}.app{padding:0 10px}.nav{padding-bottom:10px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="hero">
+ <div class="brand">HERBAL OBSERVATION · PERSONAL JOURNAL</div>
+ <h1>本草观察日记</h1><p>记录身体，积累本草经验</p>
+ <div class="datebar"><div><small id="todayDate">今天</small><strong id="solarTerm">节气观察</strong></div><div style="text-align:right"><small>个人资料库</small><strong style="font-size:15px">第一版 · 本地记录</strong></div></div>
+</header>
+<main>
+<section id="home" class="page active">
+ <div class="between"><h2>今日观察</h2><button class="btn small secondary" onclick="go('body')">＋ 新增记录</button></div>
+ <p class="sub">先记录，再观察；不急着下结论。</p>
+ <div class="statrow"><div class="stat"><strong id="countBody">0</strong><span>身体观察记录</span></div><div class="stat"><strong id="countDrug">0</strong><span>药物记录</span></div></div>
+ <h3 class="sectionhead">快速进入</h3>
+ <div class="grid">
+  <button class="tile c-green" onclick="go('body')"><div class="num">01 · OBSERVE</div><div class="emoji">🌿</div><strong>身体记录</strong><small>症状、脉象、舌象</small></button>
+  <button class="tile c-amber" onclick="go('medicine')"><div class="num">02 · HERBS</div><div class="emoji">⚱️</div><strong>药物记录</strong><small>方剂、药材、剂量</small></button>
+  <button class="tile c-blue" onclick="go('compare')"><div class="num">03 · COMPARE</div><div class="emoji">📈</div><strong>表现对比</strong><small>前后变化、历史查询</small></button>
+  <button class="tile c-purple" onclick="go('memory')"><div class="num">04 · MEMORY</div><div class="emoji">📚</div><strong>经验记忆</strong><small>良好、无变化、不良反应</small></button>
+ </div>
+ <h3 class="sectionhead">最近记录</h3><div id="recentList" class="stack"></div>
+ <div class="card notice" style="margin-top:12px">隐私提示：第一版资料保存在当前浏览器本地。请定期在「我的」中导出备份；清除浏览器资料或更换手机前务必备份。</div>
+</section>
+
+<section id="body" class="page">
+ <h2>身体记录</h2><p class="sub">点选常见表现即可，特殊情况再补充文字。</p>
+ <div class="card">
+  <label>记录日期与时间</label><input id="bodyDate" type="datetime-local">
+  <label>本次记录阶段</label><div class="chips" id="stageChips"><button class="chip selected" data-val="服药前">服药前</button><button class="chip" data-val="服药后">服药后</button><button class="chip" data-val="日常观察">日常观察</button></div>
+  <label>身体表现分类</label><div class="tabs" id="categoryTabs"></div>
+  <div id="symptomChoices" class="chips"></div>
+  <label>已选身体表现</label><div id="selectedSymptoms" class="chips"></div>
+  <div class="inline2"><div><label>整体程度</label><select id="severity"><option>轻微</option><option selected>中等</option><option>明显</option></select></div><div><label>节气</label><input id="termField" readonly></div></div>
+  <label>补充描述（选填）</label><textarea id="bodyNote" placeholder="饮食、睡眠、其他观察或特殊情况"></textarea>
+  <button class="btn" style="width:100%;margin-top:14px" onclick="saveBody()">保存身体记录</button>
+ </div>
+ <h3 class="sectionhead">六部脉象</h3>
+ <div class="card">
+  <p class="notice">点击每一部展开选择；六部独立记录，每部可多选并新增自定义脉象。</p>
+  <div class="pulse-grid" id="pulseGrid"></div>
+  <div id="pulseEditor" class="hidden">
+   <label id="pulseEditorTitle">选择脉象</label><div class="chips" id="pulseChoices"></div>
+   <div class="row" style="margin-top:10px"><input id="newPulse" placeholder="新增自定义脉象"><button class="btn small" onclick="addPulse()">新增</button></div>
+   <label>脉象补充描述（选填）</label><textarea id="pulseNote" placeholder="脉势、力度或其他观察"></textarea>
+   <button class="btn secondary" style="width:100%;margin-top:10px" onclick="closePulseEditor()">完成本部</button>
+  </div>
+ </div>
+ <h3 class="sectionhead">舌象（可选）</h3><div class="card">
+  <label>舌质</label><div class="chips" data-group="舌质"><button class="chip">淡</button><button class="chip">淡红</button><button class="chip">红</button><button class="chip">绛</button><button class="chip">紫暗</button></div>
+  <label>舌形</label><div class="chips" data-group="舌形"><button class="chip">胖大</button><button class="chip">瘦薄</button><button class="chip">齿痕</button><button class="chip">裂纹</button></div>
+  <label>舌苔</label><div class="chips" data-group="舌苔"><button class="chip">白</button><button class="chip">黄</button><button class="chip">灰黑</button><button class="chip">薄</button><button class="chip">厚</button><button class="chip">腻</button><button class="chip">少苔</button><button class="chip">无苔</button></div>
+  <label>津液</label><div class="chips" data-group="津液"><button class="chip">润</button><button class="chip">干</button></div>
+  <button class="btn" style="width:100%;margin-top:15px" onclick="saveBody(true)">保存身体记录（含脉舌）</button>
+ </div>
+</section>
+
+<section id="medicine" class="page">
+ <h2>药物记录</h2><p class="sub">每次实际服用独立记录，历史资料不会被覆盖。</p>
+ <div class="card">
+  <label>记录日期与时间</label><input id="drugDate" type="datetime-local">
+  <label>药物类型</label><div class="chips" id="drugTypes"><button class="chip selected" data-val="科学中药">科学中药</button><button class="chip" data-val="中药饮片">中药饮片</button><button class="chip" data-val="单味药材">单味药材</button><button class="chip" data-val="复方">复方</button></div>
+  <label>方剂或药材名称</label><input id="drugName" placeholder="例如：小柴胡汤、黄芩">
+  <label>药物组成与剂量（可直接贴上）</label><textarea id="drugComposition" placeholder="例如：小柴胡汤0.6 丹参0.3 桔梗0.2"></textarea>
+  <div class="inline2"><div><label>本次剂量</label><input id="drugDose" placeholder="例如：0.6"></div><div><label>单位</label><select id="drugUnit"><option>g</option><option>包</option><option>剂</option><option>片</option><option>其他</option></select></div></div>
+  <label>服用时间／次数</label><input id="drugSchedule" placeholder="例如：早餐后、每日两次">
+  <label>关联身体表现（选填）</label><input id="drugSymptoms" placeholder="例如：胃胀、食欲差">
+  <label>备注（选填）</label><textarea id="drugNote" placeholder="来源、配伍、其他说明"></textarea>
+  <button class="btn" style="width:100%;margin-top:14px" onclick="saveDrug()">保存药物记录</button>
+ </div>
+ <h3 class="sectionhead">服药反馈</h3><div class="card">
+  <label>关联药物记录</label><select id="feedbackDrug"></select>
+  <label>观察结果</label><div class="chips" id="feedbackTypes"><button class="chip" data-val="有所改善">有所改善</button><button class="chip" data-val="没有明显变化">没有明显变化</button><button class="chip" data-val="症状加重">症状加重</button><button class="chip" data-val="出现新症状">出现新症状</button><button class="chip selected" data-val="尚未反馈">尚未反馈</button></div>
+  <label>多久后出现／持续多久（选填）</label><input id="feedbackTiming" placeholder="例如：服用后约2小时，持续半天">
+  <label>反馈细节</label><textarea id="feedbackNote" placeholder="改善了什么、是否出现不适等"></textarea>
+  <button class="btn" style="width:100%;margin-top:14px" onclick="saveFeedback()">保存反馈</button>
+ </div>
+ <h3 class="sectionhead">药物历史</h3><div id="drugList" class="stack"></div>
+</section>
+
+<section id="compare" class="page">
+ <h2>表现对比</h2><p class="sub">筛选历史记录，观察变化与重复出现的现象；关联不等于因果。</p>
+ <div class="card">
+  <label>搜索药物、症状或脉象</label><input id="searchQuery" placeholder="输入关键词" oninput="renderCompare()">
+  <label>反馈类别</label><select id="compareFilter" onchange="renderCompare()"><option value="">全部</option><option>有所改善</option><option>没有明显变化</option><option>症状加重</option><option>出现新症状</option><option>尚未反馈</option></select>
+ </div>
+ <h3 class="sectionhead">匹配记录</h3><div id="compareList" class="stack"></div>
+</section>
+
+<section id="memory" class="page">
+ <h2>经验记忆</h2><p class="sub">保留好与不好，也保留无变化和资料不足的情况。</p>
+ <div id="memoryStats" class="statrow"></div>
+ <h3 class="sectionhead">需要回看的经验</h3><div id="memoryList" class="stack"></div>
+ <div class="card notice" style="margin-top:12px">第一版使用本地规则整理，不会自动诊断或推荐处方。重复出现的反馈仅作为回看线索。</div>
+</section>
+
+<section id="settings" class="page">
+ <h2>我的资料</h2><p class="sub">数据保存在当前设备的浏览器中。</p>
+ <div class="card stack">
+  <div><h3>资料备份</h3><p class="notice">导出 JSON 文件以备份身体记录、脉象、药物和反馈。</p><button class="btn" onclick="exportData()">导出备份</button></div>
+  <div><h3>恢复资料</h3><input id="importFile" type="file" accept=".json,application/json"><button class="btn secondary" style="margin-top:8px" onclick="importData()">导入备份</button></div>
+  <div><h3>自定义脉象</h3><div id="customPulseList" class="chips"></div><p class="notice">自定义选项停用功能将在后续版本完善；本版可新增并用于记录。</p></div>
+  <div><h3>资料清除</h3><p class="notice">清除后无法恢复，请先导出备份。</p><button class="btn danger" onclick="clearData()">清除本机全部资料</button></div>
+ </div>
+</section>
+</main>
+<nav class="nav"><div class="navin">
+ <button class="active" data-page="home" onclick="go('home')"><span>⌂</span>首页</button>
+ <button data-page="body" onclick="go('body')"><span>▤</span>记录</button>
+ <button data-page="compare" onclick="go('compare')"><span>⌁</span>对比</button>
+ <button data-page="memory" onclick="go('memory')"><span>▣</span>经验</button>
+ <button data-page="settings" onclick="go('settings')"><span>⚙</span>我的</button>
+</div></nav>
+</div>
+<script>
+const KEY='herbal_observation_v1';
+const categories=[
+ {name:'脉象',icon:'〰',cls:'c-green',items:[]},
+ {name:'舌象',icon:'◉',cls:'c-coral',items:['舌淡','舌淡红','舌红','舌绛','舌紫暗','胖大','瘦薄','齿痕','裂纹','苔白','苔黄','苔腻','少苔','无苔','舌干']},
+ {name:'头面与五官',icon:'◉',cls:'c-blue',items:['头痛','头晕','眼干','眼涩','耳鸣','鼻塞','流涕','咽干','咽痛']},
+ {name:'胸腹与消化',icon:'◒',cls:'c-amber',items:['胸闷','心悸','胃胀','腹胀','胃痛','恶心','反酸','嗳气','食欲差','食欲增加']},
+ {name:'疼痛与肢体',icon:'⌁',cls:'c-purple',items:['肩颈紧','腰酸','关节痛','四肢麻木','肌肉酸痛','肢体沉重','肢体乏力']},
+ {name:'寒热',icon:'♨',cls:'c-cyan',items:['怕冷','怕风','怕热','手脚冰凉','潮热','发热感','冷热交替']},
+ {name:'汗出',icon:'♧',cls:'c-pink',items:['无汗','容易出汗','自汗','夜间盗汗','局部出汗','汗后不适']},
+ {name:'睡眠',icon:'☾',cls:'c-blue',items:['入睡困难','容易醒','多梦','早醒','睡眠浅','睡眠安稳','白天嗜睡']},
+ {name:'饮食与口感',icon:'♨',cls:'c-orange',items:['食欲差','口渴','口干','口苦','口黏','喜冷饮','喜热饮','饭后饱胀']},
+ {name:'二便',icon:'◉',cls:'c-green',items:['大便正常','便秘','稀溏','腹泻','大便黏滞','次数增多','小便频繁','夜尿','排尿不畅']},
+ {name:'精神与情志',icon:'☻',cls:'c-lavender',items:['精神好','疲倦','乏力','烦躁','焦虑','情绪低落','注意力差']},
+ {name:'其他观察',icon:'＋',cls:'c-sand',items:[]}
+];
+const defaultPulses=['浮','沉','迟','数','滑','涩','弦','紧','细','弱','虚','实','洪','濡','缓','结','代','促'];
+let db=load(),activeCategory=categories[0].name,selectedSymptoms=[],activeStage='服药前',activePulse='左寸',pulseDraft={},customPulses=db.customPulses||[],drugType='科学中药',feedbackType='尚未反馈';
+const positions=['左寸','左关','左尺','右寸','右关','右尺'];
+function load(){try{return JSON.parse(localStorage.getItem(KEY))||{bodies:[],drugs:[],feedbacks:[],customPulses:[]}}catch(e){return {bodies:[],drugs:[],feedbacks:[],customPulses:[]}}}
+function persist(){db.customPulses=customPulses;localStorage.setItem(KEY,JSON.stringify(db));renderAll()}
+function dateNow(){let d=new Date();return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,16)}
+function dateLabel(v){if(!v)return '';let d=new Date(v);return d.toLocaleString('zh-CN',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hour12:false})}
+function solar(d=new Date()){let terms=[[1,5,'小寒'],[1,20,'大寒'],[2,4,'立春'],[2,19,'雨水'],[3,5,'惊蛰'],[3,20,'春分'],[4,4,'清明'],[4,20,'谷雨'],[5,5,'立夏'],[5,21,'小满'],[6,5,'芒种'],[6,21,'夏至'],[7,7,'小暑'],[7,22,'大暑'],[8,7,'立秋'],[8,23,'处暑'],[9,7,'白露'],[9,23,'秋分'],[10,8,'寒露'],[10,23,'霜降'],[11,7,'立冬'],[11,22,'小雪'],[12,7,'大雪'],[12,21,'冬至']];let md=d.getMonth()+1,day=d.getDate(),prev=terms.filter(t=>t[0]<md||(t[0]===md&&t[1]<=day)).pop();if(!prev)prev=terms[terms.length-1];return prev[2]+'节气附近'}
+function init(){document.getElementById('todayDate').textContent=new Date().toLocaleDateString('zh-CN',{year:'numeric',month:'long',day:'numeric',weekday:'short'});document.getElementById('solarTerm').textContent=solar();document.getElementById('termField').value=solar();document.getElementById('bodyDate').value=dateNow();document.getElementById('drugDate').value=dateNow();
+ document.querySelectorAll('#stageChips .chip').forEach(b=>b.onclick=()=>{document.querySelectorAll('#stageChips .chip').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');activeStage=b.dataset.val});
+ document.querySelectorAll('#drugTypes .chip').forEach(b=>b.onclick=()=>{document.querySelectorAll('#drugTypes .chip').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');drugType=b.dataset.val});
+ document.querySelectorAll('#feedbackTypes .chip').forEach(b=>b.onclick=()=>{document.querySelectorAll('#feedbackTypes .chip').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');feedbackType=b.dataset.val});
+ document.querySelectorAll('[data-group] .chip').forEach(b=>b.onclick=()=>b.classList.toggle('selected'));
+ renderCategoryTabs();renderPulseGrid();renderAll()}
+function go(page){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===page));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===page));if(page==='compare')renderCompare();if(page==='settings')renderCustomPulse();window.scrollTo({top:0,behavior:'smooth'})}
+function renderCategoryTabs(){let el=document.getElementById('categoryTabs');el.innerHTML=categories.map(c=>`<button class="${c.name===activeCategory?'active':''}" onclick="setCategory('${c.name}')">${c.name}</button>`).join('');renderSymptoms()}
+function setCategory(n){activeCategory=n;renderCategoryTabs()}
+function renderSymptoms(){let c=categories.find(x=>x.name===activeCategory);let items=c.items.slice();let el=document.getElementById('symptomChoices');if(activeCategory==='脉象'){el.innerHTML=`<button class="btn secondary" onclick="document.getElementById('pulseGrid').scrollIntoView({behavior:'smooth'})">前往六部脉象记录</button>`;return}if(activeCategory==='其他观察'){el.innerHTML='<input id="customSymptom" placeholder="输入自定义身体表现"><button class="btn small" onclick="addSymptom()">添加</button>';return}el.innerHTML=items.map(x=>`<button class="chip ${selectedSymptoms.includes(x)?'selected':''}" onclick="toggleSymptom('${x}')">${x}</button>`).join('')}
+function toggleSymptom(x){selectedSymptoms=selectedSymptoms.includes(x)?selectedSymptoms.filter(v=>v!==x):[...selectedSymptoms,x];renderSymptoms();document.getElementById('selectedSymptoms').innerHTML=selectedSymptoms.map(x=>`<button class="chip selected" onclick="toggleSymptom('${x}')">${x} ×</button>`).join('')||'<span class="notice">尚未选择</span>'}
+function addSymptom(){let i=document.getElementById('customSymptom'),v=i.value.trim();if(v&&!selectedSymptoms.includes(v)){selectedSymptoms.push(v);document.getElementById('selectedSymptoms').innerHTML=selectedSymptoms.map(x=>`<button class="chip selected" onclick="toggleSymptom('${x}')">${x} ×</button>`).join('');i.value=''}}
+function renderPulseGrid(){let el=document.getElementById('pulseGrid');el.innerHTML=['左','右'].map(side=>`<div class="hand"><h3>${side}手</h3>${['寸','关','尺'].map(part=>{let p=side+part,vals=pulseDraft[p]||{};return `<div class="position ${activePulse===p?'active':''}"><button onclick="openPulse('${p}')"><span>${part}</span><span>›</span></button><small>${(vals.items||[]).join('、')||'点击选择脉象'}</small></div>`}).join('')}</div>`).join('')}
+function openPulse(p){activePulse=p;let x=pulseDraft[p]||{items:[],note:''};document.getElementById('pulseEditor').classList.remove('hidden');document.getElementById('pulseEditorTitle').textContent=p+' · 选择脉象（可多选）';document.getElementById('pulseNote').value=x.note||'';renderPulseChoices();renderPulseGrid()}
+function renderPulseChoices(){let x=pulseDraft[activePulse]||{items:[],note:''},all=[...defaultPulses,...customPulses];document.getElementById('pulseChoices').innerHTML=all.map(p=>`<button class="chip ${(x.items||[]).includes(p)?'selected':''}" onclick="togglePulse('${p}')">${p}</button>`).join('')}
+function togglePulse(p){let x=pulseDraft[activePulse]||{items:[],note:''};x.items=x.items||[];x.items=x.items.includes(p)?x.items.filter(v=>v!==p):[...x.items,p];pulseDraft[activePulse]=x;renderPulseChoices();renderPulseGrid()}
+function addPulse(){let i=document.getElementById('newPulse'),v=i.value.trim();if(v&&!defaultPulses.includes(v)&&!customPulses.includes(v)){customPulses.push(v);togglePulse(v);i.value='';renderPulseChoices()}}
+function closePulseEditor(){if(activePulse)pulseDraft[activePulse].note=document.getElementById('pulseNote').value;document.getElementById('pulseEditor').classList.add('hidden');renderPulseGrid()}
+function collectTongue(){let o={};document.querySelectorAll('[data-group]').forEach(g=>{let a=[...g.querySelectorAll('.chip.selected')].map(b=>b.textContent.trim());if(a.length)o[g.dataset.group]=a});return o}
+function saveBody(fromTongue=false){if(document.getElementById('pulseEditor').classList.contains('hidden')===false)closePulseEditor();let pulses={};positions.forEach(p=>{let x=pulseDraft[p];if(x&&(x.items?.length||x.note))pulses[p]={items:x.items||[],note:x.note||''}});let tongue=collectTongue();if(!selectedSymptoms.length&&!Object.keys(pulses).length&&!Object.keys(tongue).length&&!document.getElementById('bodyNote').value.trim()){alert('请至少选择一项身体表现，或填写补充描述。');return}db.bodies.push({id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),date:document.getElementById('bodyDate').value,stage:activeStage,term:solar(new Date(document.getElementById('bodyDate').value||Date.now())),symptoms:[...selectedSymptoms],severity:document.getElementById('severity').value,note:document.getElementById('bodyNote').value.trim(),pulses,tongue});selectedSymptoms=[];pulseDraft={};document.getElementById('bodyNote').value='';document.getElementById('selectedSymptoms').innerHTML='<span class="notice">尚未选择</span>';document.querySelectorAll('[data-group] .chip').forEach(b=>b.classList.remove('selected'));document.getElementById('bodyDate').value=dateNow();renderPulseGrid();persist();alert('身体记录已保存到本机浏览器。')}
+function saveDrug(){let name=document.getElementById('drugName').value.trim();if(!name){alert('请填写方剂或药材名称。');return}db.drugs.push({id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),date:document.getElementById('drugDate').value,type:drugType,name,composition:document.getElementById('drugComposition').value.trim(),dose:document.getElementById('drugDose').value.trim(),unit:document.getElementById('drugUnit').value,schedule:document.getElementById('drugSchedule').value.trim(),symptoms:document.getElementById('drugSymptoms').value.trim(),note:document.getElementById('drugNote').value.trim()});['drugName','drugComposition','drugDose','drugSchedule','drugSymptoms','drugNote'].forEach(id=>document.getElementById(id).value='');document.getElementById('drugDate').value=dateNow();persist();alert('药物记录已保存到本机浏览器。')}
+function saveFeedback(){let id=document.getElementById('feedbackDrug').value;if(!id){alert('请先保存一笔药物记录，再关联反馈。');return}db.feedbacks.push({id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),drugId:id,date:dateNow(),type:feedbackType,timing:document.getElementById('feedbackTiming').value.trim(),note:document.getElementById('feedbackNote').value.trim()});document.getElementById('feedbackTiming').value='';document.getElementById('feedbackNote').value='';persist();alert('服药反馈已保存。')}
+function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function renderAll(){document.getElementById('countBody').textContent=db.bodies.length;document.getElementById('countDrug').textContent=db.drugs.length;renderRecent();renderDrugs();renderFeedbackSelect();renderCompare();renderMemory();renderCustomPulse()}
+function renderRecent(){let el=document.getElementById('recentList'),items=[...db.bodies.map(x=>({...x,kind:'身体观察'})),...db.drugs.map(x=>({...x,kind:'药物记录',name:x.name}))].sort((a,b)=>new Date(b.date)-new Date(a.date)).slice(0,5);el.innerHTML=items.map(x=>`<div class="record"><div class="between"><strong>${esc(x.kind)} · ${esc(x.name||x.stage||'记录')}</strong><small>${esc(dateLabel(x.date))}</small></div><p>${esc((x.symptoms||[]).join('、')||x.composition||x.symptoms||'')}</p><small>${esc(x.term||x.type||'')}</small></div>`).join('')||'<div class="empty">还没有记录，试着新增第一笔观察。</div>'}
+function renderDrugs(){let el=document.getElementById('drugList');el.innerHTML=[...db.drugs].reverse().map(x=>`<div class="record"><div class="between"><strong>${esc(x.name)}</strong><small>${esc(dateLabel(x.date))}</small></div><p>${esc(x.type)} · ${esc(x.dose)} ${esc(x.unit)}</p><p>${esc(x.composition||x.symptoms||'')}</p><small>${esc(x.schedule||'未填写服用时间')}</small></div>`).join('')||'<div class="empty">暂无药物记录。</div>'}
+function renderFeedbackSelect(){let s=document.getElementById('feedbackDrug'),old=s.value;s.innerHTML='<option value="">选择药物记录</option>'+db.drugs.map(d=>`<option value="${esc(d.id)}">${esc(d.name)} · ${esc(dateLabel(d.date))}</option>`).join('');if(db.drugs.some(d=>d.id===old))s.value=old}
+function renderCompare(){let q=(document.getElementById('searchQuery')?.value||'').toLowerCase(),f=document.getElementById('compareFilter')?.value||'',items=[];db.drugs.forEach(d=>{let fs=db.feedbacks.filter(x=>x.drugId===d.id);if(!fs.length)items.push({drug:d,feedback:null});fs.forEach(x=>items.push({drug:d,feedback:x}))});items=items.filter(x=>{let str=[x.drug.name,x.drug.composition,x.drug.symptoms,x.feedback?.type,x.feedback?.note,...db.bodies.map(b=>b.symptoms.join(' '))].join(' ').toLowerCase();return (!q||str.includes(q))&&(!f||x.feedback?.type===f)}).reverse();document.getElementById('compareList').innerHTML=items.map(x=>`<div class="record"><div class="between"><strong>${esc(x.drug.name)}</strong><small>${esc(dateLabel(x.drug.date))}</small></div><p>药物：${esc(x.drug.type)} ${esc(x.drug.dose)} ${esc(x.drug.unit)}</p><p>身体表现：${esc(x.drug.symptoms||'未关联')}</p><p>反馈：${esc(x.feedback?.type||'尚未反馈')}</p><small>${esc(x.feedback?.timing||x.feedback?.note||'')}</small></div>`).join('')||'<div class="empty">没有符合条件的记录。新增药物与反馈后可在此筛选。</div>'}
+function renderMemory(){let types=['有所改善','没有明显变化','症状加重','出现新症状','尚未反馈'];document.getElementById('memoryStats').innerHTML=types.slice(0,4).map((t,i)=>`<div class="stat"><strong>${db.feedbacks.filter(f=>f.type===t).length}</strong><span>${t}</span></div>`).join('');let list=[];db.feedbacks.slice().reverse().forEach(f=>{let d=db.drugs.find(x=>x.id===f.drugId);if(d)list.push({f,d})});document.getElementById('memoryList').innerHTML=list.map(({f,d})=>`<div class="record"><div class="between"><strong>${esc(f.type)} · ${esc(d.name)}</strong><small>${esc(dateLabel(f.date))}</small></div><p>${esc(f.note||'暂无补充描述')}</p><small>${esc(f.timing||'未记录反应出现时间')}</small></div>`).join('')||'<div class="empty">反馈累积后，会在这里保留良好、无变化与不良反应记录。</div>'}
+function renderCustomPulse(){let el=document.getElementById('customPulseList');if(el)el.innerHTML=customPulses.map(p=>`<span class="chip selected">${esc(p)}</span>`).join('')||'<span class="notice">尚未新增自定义脉象</span>'}
+function exportData(){let blob=new Blob([JSON.stringify({...db,customPulses},null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='本草观察日记备份_'+new Date().toISOString().slice(0,10)+'.json';a.click();URL.revokeObjectURL(a.href)}
+function importData(){let f=document.getElementById('importFile').files[0];if(!f){alert('请先选择 JSON 备份文件。');return}let r=new FileReader();r.onload=()=>{try{let x=JSON.parse(r.result);if(!Array.isArray(x.bodies)||!Array.isArray(x.drugs)||!Array.isArray(x.feedbacks))throw Error();if(!confirm('导入会替换当前本机资料，建议先导出备份。继续吗？'))return;db={bodies:x.bodies,drugs:x.drugs,feedbacks:x.feedbacks,customPulses:x.customPulses||[]};customPulses=db.customPulses;persist();alert('资料已导入。')}catch(e){alert('文件格式不正确，无法导入。')}};r.readAsText(f)}
+function clearData(){if(confirm('确定清除当前浏览器保存的全部身体、药物与反馈资料？此操作无法撤销。')){db={bodies:[],drugs:[],feedbacks:[],customPulses:[]};customPulses=[];pulseDraft={};persist();alert('本机资料已清除。')}}
+init();
+</script>
+</body></html>
